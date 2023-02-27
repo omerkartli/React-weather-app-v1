@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import graphicNight from '../images/graphicNight.svg';
+import graphicDay from '../images/graphicDay.svg';
 import locationiconblue from "../images/locationiconblue.svg";
 import { FiArrowUp } from "react-icons/fi";
 import { FiArrowDown } from "react-icons/fi";
@@ -10,14 +11,15 @@ import sunrise from '../images/sunrise.svg';
 import sunset from '../images/sunset.svg';
 import daytime from '../images/daytime.svg';
 
+
 function Htmlfile() {
 
     const API_URL = 'http://api.weatherapi.com/v1/';
     const key ='3db3b711653346c291170100232402';
-
     const [result,setResult] = useState({});
     const [cityName, setcityName] = useState('istanbul');
-    
+    let now = new Date();
+
     const getResult = ()=> {
         let query = `${API_URL}forecast.json?q=${cityName}&days=7&key=${key}`
         console.log(query)
@@ -25,17 +27,15 @@ function Htmlfile() {
                 .then(weather => weather.json())
                 .then(
                     data => {
-                        setResult(data)
-                        
-                        console.log(data)
+                        setResult(data)  
                     }
                 )
     }
     useEffect(() => {
         cityName && getResult(cityName)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[cityName])
     console.log( cityName)
-    
 
     let date = new Date();
     const dateNow = date.toLocaleString('en-US', {
@@ -93,12 +93,55 @@ function Htmlfile() {
     }) + ', ' + date.toLocaleString('en-US', {
         day: 'numeric'
     })
-      
+     ///////-----------DayTime----------------////////////
+     const convertTime12to24h = (time12h) => {
+        const [time, modifier] = time12h.split(' ');
+        let [hours] = time.split(':');
+        if (hours === '12') {
+            hours = '00';
+        }
+        if (modifier === 'PM') {
+            hours = parseInt(hours, 10) + 12;
+        }
+        return `${hours}`;
+    }
+    
+    const convertTime12to24m = (time12h) => {
+        const [time, modifier] = time12h.split(' ');
+        let [hours, minutes] = time.split(':');
+        if (hours === '12') {
+            hours = '00';
+        }
+        if (modifier === 'PM') {
+            hours = parseInt(hours, 10) + 12;
+        }
+        return `${minutes}`;
+    }
+
+    const getDayTime = (sunrisetimeT, sunsettimeT) => {
+    let sunset24h = convertTime12to24h(sunsettimeT);
+    let sunset24m = convertTime12to24m(sunsettimeT);
+    let sunrise24h = convertTime12to24h(sunrisetimeT)
+    let sunrise24m = convertTime12to24m(sunrisetimeT);
+    let sunsettime = new Date(null, null, null, sunset24h, sunset24m);
+    let sunrisetime = new Date(null, null, null, sunrise24h, sunrise24m);
+    let delta = Math.abs(sunrisetime - sunsettime) / 1000;
+    let hours = Math.floor(delta / 3600) % 24;
+    delta -= hours * 3600;
+    let minutes = Math.floor(delta / 60) % 60;
+    delta -= minutes * 60;
+    return `${hours}h ${minutes}m`
+    }
+     ///////-----------DayTime----------------////////////
     
     return (
         <div className='outher-class'>
             <div>
-                <img className="day" src={graphicNight} alt="dayimage"/>
+                {(now.getHours() > 7 && now.getHours() < 17) ? (
+                    <img className="day" src={graphicDay} alt="dayimage"/>   
+                ): 
+                    <img className="day" src={graphicNight} alt="dayimage"/>     
+                } 
                 <div className="app">
                 <div className="date-and-bar">
                     <div className="date">{dateNow}</div>  
@@ -109,7 +152,7 @@ function Htmlfile() {
                         <img src={locationiconblue} alt="location icon" height="12px"/>
                     </div> 
                 </div>
-                {typeof result.current === 'undefined' ? (
+                {!result.current ? (
                     <div>
                         <p>buraya diğer sayfayı giircez abi alttan yukarı çıkanı </p>
                     </div>
@@ -171,7 +214,7 @@ function Htmlfile() {
                                 </div>
                                 <div className="daytime-stuff">
                                     <div className="daytime-image"><img width="24px" height="24px" src={daytime} alt="gunuzunlugu foti"/></div>
-                                    <div className="daytime">13h1m</div>
+                                    <div className="daytime">{getDayTime(result.forecast.forecastday[0].astro.sunset, result.forecast.forecastday[0].astro.sunrise)}</div>
                                     <div className="daytime-text">Daytime</div>
                                 </div>
                             </div>
@@ -215,13 +258,10 @@ function Htmlfile() {
                                 </div> 
                             </div>
                         </div>  
-                ) }
-                
+                    ) }
                 </div>
             </div>
         </div>
-    )
-    }
-
+    ) }
 
 export default Htmlfile
