@@ -133,15 +133,37 @@ function Htmlfile() {
     return `${hours}h ${minutes}m`
     }
      ///////-----------DayTime----------------////////////
-    
+     const getDayTimeRise = (sunrisetimeT) => {
+        let sunrise24h = convertTime12to24h(sunrisetimeT)
+        let sunrisetime = new Date(null, null, null, sunrise24h, null);
+        console.log(sunrisetime)
+        return `${sunrisetime.getHours()}`
+        }
+     const getDayTimeSet = ( sunsettimeT) => {
+        let sunset24h = convertTime12to24h(sunsettimeT);
+        let sunsettime = new Date(null, null, null, sunset24h, null);
+        console.log(sunsettime)
+        return `${sunsettime.getHours()}`
+        }
+
     return (
         <div className='outher-class'>
             <div>
-                {(now.getHours() > 7 && now.getHours() < 17) ? (
-                    <img className="day" src={graphicDay} alt="dayimage"/>   
-                ): 
-                    <img className="day" src={graphicNight} alt="dayimage"/>     
-                } 
+                { result.current ? (
+                    <div>
+                    {(now.getHours() > getDayTimeRise(result.forecast.forecastday[0].astro.sunrise)
+                        && now.getHours() < getDayTimeSet(result.forecast.forecastday[0].astro.sunset)) ? (
+                            <img className="day" src={graphicDay} alt="dayimage"/>   
+                        ): 
+                            <img className="day" src={graphicNight} alt="dayimage"/>     
+                        }
+                    </div>
+                ): (
+                    <div>
+                        <p>buraya diğer sayfayı giircez abi alttan yukarı çıkanı </p>
+                    </div>) }
+                
+
                 <div className="app">
                 <div className="date-and-bar">
                     <div className="date">{dateNow}</div>  
