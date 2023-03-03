@@ -10,17 +10,18 @@ import wind from '../images/wind.svg';
 import sunrise from '../images/sunrise.svg';
 import sunset from '../images/sunset.svg';
 import daytime from '../images/daytime.svg';
+import Search from './Search';
 
 
 function Htmlfile() {
 
     const API_URL = 'http://api.weatherapi.com/v1/';
-    const key ='3db3b711653346c291170100232402';
+    const key = '3db3b711653346c291170100232402';
     const [result,setResult] = useState({});
-    const [cityName, setcityName] = useState('istanbul');
+    const [cityName, setcityName] = useState('Ankara');
     let now = new Date();
 
-    const getResult = ()=> {
+    const getResult = () => {
         let query = `${API_URL}forecast.json?q=${cityName}&days=7&key=${key}`
         console.log(query)
             fetch(query)
@@ -36,6 +37,7 @@ function Htmlfile() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[cityName])
     console.log( cityName)
+    
 
     let date = new Date();
     const dateNow = date.toLocaleString('en-US', {
@@ -160,7 +162,7 @@ function Htmlfile() {
                     </div>
                 ): (
                     <div>
-                        <p>buraya diğer sayfayı giircez abi alttan yukarı çıkanı </p>
+                        <img className="day" src={graphicDay} alt="dayimage"/>
                     </div>) }
                 
 
@@ -176,7 +178,7 @@ function Htmlfile() {
                 </div>
                 {!result.current ? (
                     <div>
-                        <p>buraya diğer sayfayı giircez abi alttan yukarı çıkanı </p>
+                        <p><Search/></p>
                     </div>
                 ): (
                         <div className="content">
