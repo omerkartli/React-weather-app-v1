@@ -19,6 +19,7 @@ function Indexandsearch() {
 
   const [cityName, setcityName] = useState("İstanbul");
   const [latLon, setLatLon] = useState('');
+
   console.log(latLon)
   
   let now = new Date();
@@ -31,7 +32,8 @@ function Indexandsearch() {
       .then((weather) => weather.json())
       .then((data) => {
         setResult(data);
-        console.log(data)
+        setcityName(data.location.name);
+        
       });
   };
 
@@ -172,13 +174,29 @@ function Indexandsearch() {
   };
   const urlSearchParams = new URLSearchParams(window.location.search);
   const params = Object.fromEntries(urlSearchParams.entries());
-  console.log(params.city);
+  console.log(params.coords);
+
+  const getLocationJs = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log(position);
+      const aaaa =`${position.coords.latitude},${position.coords.longitude}`;
+      console.log(aaaa)
+      getResult(aaaa)
+    } ) 
+  }
 
   useEffect(() => {
-    params.city && getResult(params.cords);
-    setcityName(params.city);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if(params.city && getResult(params.cords)){
+      // console.log(result.location.name)
+      // result?.location?.name && setcityName(result.location.name);
+    }else{
+      getLocationJs();
+      // result?.location?.name && setcityName(result.location.name);
+      //eslint-disable-next-line react-hooks/exhaustive-deps
+    }
   }, [params.city]);
+
+
   
   return (
     <div className="outher-class">
@@ -202,6 +220,7 @@ function Indexandsearch() {
             <div className="app">
               <div className="date-and-bar">
                 <div className="date">{dateNow}</div>
+                
                 <input
                   type="text"
                   id="search-bar"
