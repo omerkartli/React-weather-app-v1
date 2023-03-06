@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import locationicon from '../images/locationicon.svg';
-import graphicDay from '../images/graphicDay.svg';
 
-export default function Search() {
+
+export default function Search({ cityName, setcityName, setLanLon}) {
   const API_URL2 = 'https://www.yahoo.com/news/_tdnews/api/resource/WeatherSearch;text'
-  
-  const [cityName, setcityName] = useState('')
+
 
   function searchWeather() {
-    const searchTerm = document.getElementById("search-input").value;
-    if (searchTerm.length < 3) return;
-    let query = `${API_URL2}=${searchTerm}`
+    if (cityName.length < 3) return;
+    let query = `${API_URL2}=${cityName}`
     console.log(query)
     fetch(query)
       .then(response => response.json())
@@ -18,16 +16,18 @@ export default function Search() {
   };
   const displayResult2 = (results) => {
     let result = results.sort((a, b) => (a.city > b.city) ? 1 : ((b.city > a.city) ? -1 : 0))
-    console.log(result);
+    console.log(results)
 
     const output = [...result].reduce((acc, curr, i, k) => {
       const idx = acc.findIndex(e => e.alphabet === curr.city[0]);
       if (idx === -1) {
-        acc.push({ alphabet: curr.city[0], cities: [`${curr.city}, ${curr.country}`] });
+        acc.push({ alphabet: curr.city[0], cities: [`${curr.city}, ${curr.country}`], lat:[curr.lat], lon:[curr.lon] });
       }
       else {
+        acc[idx].lat.push(curr.lat)
+        acc[idx].lon.push(curr.lon)
         acc[idx].cities.push(`${curr.city}, ${curr.country}`);
-        acc[idx].cities.sort((r1, r2) => r1.city > r2.city ? 1 : -1);
+        // acc[idx].cities.sort((r1, r2) => r1.city > r2.city ? 1 : -1);
       }
       return acc;
     }, []).sort();
@@ -54,7 +54,9 @@ export default function Search() {
         let citiess = document.createElement("li");
         let link = document.createElement("a");
         const first = output[i].cities[j].split(',')[0]
-        link.setAttribute("href", `index.html?city=${first}`)
+        console.log(output[i])
+        const coords = output[i].lat[j]+ ','+ output[i].lon[j]
+        link.setAttribute("href", `index.html?city=${first}&cords=${coords}`)
         link.innerText = output[i].cities[j];
         citiess.appendChild(link)
         citiess.style.marginBottom = "5px"
@@ -75,7 +77,7 @@ export default function Search() {
   }
   return (
     <div className='body'> 
-    <img className="day-search" src={graphicDay} alt="dayimage" />
+    
     <div className="app-searchS">
         <div>
             <p className="label-input">Location</p>

@@ -526,7 +526,7 @@ input[type="text" i] {
 
 .app-searchS{
   position: relative;
-  height: 800px;
+  height: 100vh;
   padding-left: 10px;
   padding-top: 10px;
   padding-right: 10px;
