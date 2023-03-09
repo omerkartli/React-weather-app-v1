@@ -14,6 +14,7 @@ import snipper from "../images/snipper.gif";
 import Search from "./Search";
 import RowItem from "./RowItem";
 import ScrollItem from "./ScrollItem";
+import ImageItem from "./ImageItem";
 
 function Indexandsearch() {
   const API_URL = "http://api.weatherapi.com/v1/";
@@ -214,27 +215,21 @@ function Indexandsearch() {
                 getDayTimeRise(result.forecast.forecastday[0].astro.sunrise) &&
               now.getHours() <
                 getDayTimeSet(result.forecast.forecastday[0].astro.sunset) ? (
-                <img
-                  className="day"
-                  src={graphicDay}
-                  alt="dayimage"
+                <ImageItem
+                  image = {graphicDay}
                   onClick={getLocationJs}
                 />
               ) : (
-                <img
-                  className="day"
-                  src={graphicNight}
-                  alt="dayimage"
+                <ImageItem
+                  image = {graphicNight}
                   onClick={getLocationJs}
                 />
               )
             ) : (
-              <img
-                className="day"
-                src={graphicDay}
-                alt="dayimage"
-                onClick={getLocationJs}
-              />
+              <ImageItem
+                  image = {graphicDay}
+                  onClick={getLocationJs}
+                />
             )}
           </div>
         )}
