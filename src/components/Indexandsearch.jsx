@@ -356,8 +356,8 @@ function Indexandsearch() {
 
                 <div className="row5">
                   <ScrollItem
-                    imageN={result.forecast.forecastday[1].day.condition.icon}
-                    nextDateN={dateNextDay1}
+                    image={result.forecast.forecastday[1].day.condition.icon}
+                    nextDate={dateNextDay1}
                     maxMinC={
                       `\n ${Math.round(
                         result.forecast.forecastday[1].day.maxtemp_c
@@ -368,8 +368,8 @@ function Indexandsearch() {
                     }
                   />
                   <ScrollItem
-                    imageN={result.forecast.forecastday[2].day.condition.icon}
-                    nextDateN={dateNextDay2}
+                    image={result.forecast.forecastday[2].day.condition.icon}
+                    nextDate={dateNextDay2}
                     maxMinC={
                       `\n ${Math.round(
                         result.forecast.forecastday[2].day.maxtemp_c
@@ -380,8 +380,8 @@ function Indexandsearch() {
                     }
                   />
                   <ScrollItem
-                    imageN={result.forecast.forecastday[3].day.condition.icon}
-                    nextDateN={dateNextDay3}
+                    image={result.forecast.forecastday[3].day.condition.icon}
+                    nextDate={dateNextDay3}
                     maxMinC={
                       `\n ${Math.round(
                         result.forecast.forecastday[3].day.maxtemp_c
@@ -392,8 +392,8 @@ function Indexandsearch() {
                     }
                   />
                   <ScrollItem
-                    imageN={result.forecast.forecastday[4].day.condition.icon}
-                    nextDateN={dateNextDay4}
+                    image={result.forecast.forecastday[4].day.condition.icon}
+                    nextDate={dateNextDay4}
                     maxMinC={
                       `\n ${Math.round(
                         result.forecast.forecastday[4].day.maxtemp_c
@@ -404,8 +404,8 @@ function Indexandsearch() {
                     }
                   />
                   <ScrollItem
-                    imageN={result.forecast.forecastday[5].day.condition.icon}
-                    nextDateN={dateNextDay5}
+                    image={result.forecast.forecastday[5].day.condition.icon}
+                    nextDate={dateNextDay5}
                     maxMinC={
                       `\n ${Math.round(
                         result.forecast.forecastday[5].day.maxtemp_c
@@ -416,8 +416,8 @@ function Indexandsearch() {
                     }
                   />
                   <ScrollItem
-                    imageN={result.forecast.forecastday[6].day.condition.icon}
-                    nextDateN={dateNextDay6}
+                    image={result.forecast.forecastday[6].day.condition.icon}
+                    nextDate={dateNextDay6}
                     maxMinC={
                       `\n ${Math.round(
                         result.forecast.forecastday[6].day.maxtemp_c
