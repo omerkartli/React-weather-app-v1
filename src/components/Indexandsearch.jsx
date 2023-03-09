@@ -13,8 +13,7 @@ import daytime from "../images/daytime.svg";
 import snipper from "../images/snipper.gif";
 import Search from "./Search";
 import RowItem from "./RowItem";
-// import ScrollItem from "./ScrollItem";
-
+import ScrollItem from "./ScrollItem";
 
 function Indexandsearch() {
   const API_URL = "http://api.weatherapi.com/v1/";
@@ -22,8 +21,8 @@ function Indexandsearch() {
   const [result, setResult] = useState({});
 
   const [cityName, setcityName] = useState("İstanbul");
-  const [latLon, setLatLon] = useState('41.01253,29.0808898');
-  
+  const [latLon, setLatLon] = useState("41.01253,29.0808898");
+
   let now = new Date();
 
   const getResult = (cityName) => {
@@ -178,16 +177,16 @@ function Indexandsearch() {
   const getLocationJs = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       // console.log(position);
-      const aaaa =`${position.coords.latitude},${position.coords.longitude}`;
+      const aaaa = `${position.coords.latitude},${position.coords.longitude}`;
       // console.log(aaaa)
-      getResult(aaaa)
-    } ) 
-  }
-  
+      getResult(aaaa);
+    });
+  };
+
   // console.log(latLon)
 
   useEffect(() => {
-    if(!getResult(latLon)){
+    if (!getResult(latLon)) {
       getLocationJs();
     }
     // eslint-disable-next-line
@@ -199,32 +198,45 @@ function Indexandsearch() {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
-  },[latLon]);
+  }, [latLon]);
 
   return (
     <div className="outher-class">
       <div>
-      {loading ? (
-        <div>
-          <img className="snipper" src={snipper} alt="snipperimage" />{" "}
-        </div> ) : (
-
-            <div>  
-       
-        {result.current ? (
-          
-          now.getHours() >
-            getDayTimeRise(result.forecast.forecastday[0].astro.sunrise) &&
-          now.getHours() <
-            getDayTimeSet(result.forecast.forecastday[0].astro.sunset) ? (
-            <img className="day" src={graphicDay} alt="dayimage" onClick={getLocationJs}/>
-          ) : (
-            <img className="day" src={graphicNight} alt="dayimage" onClick={getLocationJs} />
-          )
+        {loading ? (
+          <div>
+            <img className="snipper" src={snipper} alt="snipperimage" />{" "}
+          </div>
         ) : (
-            <img className="day" src={graphicDay} alt="dayimage" onClick={getLocationJs} />
-        )}
-        </div>
+          <div>
+            {result.current ? (
+              now.getHours() >
+                getDayTimeRise(result.forecast.forecastday[0].astro.sunrise) &&
+              now.getHours() <
+                getDayTimeSet(result.forecast.forecastday[0].astro.sunset) ? (
+                <img
+                  className="day"
+                  src={graphicDay}
+                  alt="dayimage"
+                  onClick={getLocationJs}
+                />
+              ) : (
+                <img
+                  className="day"
+                  src={graphicNight}
+                  alt="dayimage"
+                  onClick={getLocationJs}
+                />
+              )
+            ) : (
+              <img
+                className="day"
+                src={graphicDay}
+                alt="dayimage"
+                onClick={getLocationJs}
+              />
+            )}
+          </div>
         )}
       </div>
       <div>
@@ -233,7 +245,7 @@ function Indexandsearch() {
             <div className="app">
               <div className="date-and-bar">
                 <div className="date">{dateNow}</div>
-                
+
                 <input
                   type="text"
                   id="search-bar"
@@ -241,8 +253,8 @@ function Indexandsearch() {
                   onChange={(event) => setcityName(event.target.value)}
                   onKeyDown={getResult}
                   onClick={() => {
-                    result.current=false
-                    setcityName('')
+                    result.current = false;
+                    setcityName("");
                     // console.log("clicked")
                   }}
                 />
@@ -304,170 +316,129 @@ function Indexandsearch() {
                 </div>
 
                 <div className="row3">
-                  <RowItem 
-                        image = {humidity}
-                        value = {result.current.humidity+"%"}
-                        text = "Humidity"
-                        />
-                  <RowItem style={{ marginLeft: "5px" }}
-                        image = {pressure} 
-                        value = {result.current.pressure_mb+"mBar"}
-                        text = "Pressure"
-                        />
                   <RowItem
-                        image = {wind} 
-                        value = {result.current.wind_kph+"km/h"}
-                        text = "Wind"
-                        />
+                    image={humidity}
+                    value={result.current.humidity + "%"}
+                    text="Humidity"
+                  />
+                  <RowItem
+                    style={{ marginLeft: "5px" }}
+                    image={pressure}
+                    value={result.current.pressure_mb + "mBar"}
+                    text="Pressure"
+                  />
+                  <RowItem
+                    image={wind}
+                    value={result.current.wind_kph + "km/h"}
+                    text="Wind"
+                  />
                 </div>
                 <div className="row4">
                   <RowItem
-                      image = {sunrise} 
-                      value = {result.forecast.forecastday[0].astro.sunrise}
-                      text = "Sunrise"
-                      />
+                    image={sunrise}
+                    value={result.forecast.forecastday[0].astro.sunrise}
+                    text="Sunrise"
+                  />
                   <RowItem
-                      image = {sunset} 
-                      value = {result.forecast.forecastday[0].astro.sunset}
-                      text = "Sunset"
-                      />
+                    image={sunset}
+                    value={result.forecast.forecastday[0].astro.sunset}
+                    text="Sunset"
+                  />
                   <RowItem
-                      image = {daytime} 
-                      value = {getDayTime(
-                        result.forecast.forecastday[0].astro.sunset,
-                        result.forecast.forecastday[0].astro.sunrise
-                      )}
-                      text = "Daytime"
-                      />    
+                    image={daytime}
+                    value={getDayTime(
+                      result.forecast.forecastday[0].astro.sunset,
+                      result.forecast.forecastday[0].astro.sunrise
+                    )}
+                    text="Daytime"
+                  />
                 </div>
 
                 <div className="row5">
-                  <div className="next-day1-stuff">
-                    <div>
-                      <img
-                        height="44px"
-                        className="icon-image1"
-                        src={result.forecast.forecastday[1].day.condition.icon}
-                        alt="hava durumu ikonu "
-                      />
-                    </div>
-                    <div className="next-day1">{dateNextDay1} </div>
-                    <div className="next-day1">
-                      {`\n ${Math.round(
+                  <ScrollItem
+                    imageN={result.forecast.forecastday[1].day.condition.icon}
+                    nextDateN={dateNextDay1}
+                    maxMinC={
+                      `\n ${Math.round(
                         result.forecast.forecastday[1].day.maxtemp_c
                       )}°C↑` +
-                        `   ${Math.round(
-                          result.forecast.forecastday[1].day.mintemp_c
-                        )}°C↓`}
-                    </div>
-                  </div>
-                  <div className="next-day2-stuff">
-                    <div>
-                      {" "}
-                      <img
-                        height="44px"
-                        className="icon-image2"
-                        src={result.forecast.forecastday[2].day.condition.icon}
-                        alt="hava durumu ikonu "
-                      />{" "}
-                    </div>
-                    <div className="next-day2">{dateNextDay2} </div>
-                    <div className="next-day2">
-                      {`\n ${Math.round(
+                      ` ${Math.round(
+                        result.forecast.forecastday[1].day.mintemp_c
+                      )}°C↓`
+                    }
+                  />
+                  <ScrollItem
+                    imageN={result.forecast.forecastday[2].day.condition.icon}
+                    nextDateN={dateNextDay2}
+                    maxMinC={
+                      `\n ${Math.round(
                         result.forecast.forecastday[2].day.maxtemp_c
                       )}°C↑` +
-                        `   ${Math.round(
-                          result.forecast.forecastday[2].day.mintemp_c
-                        )}°C↓`}
-                    </div>
-                  </div>
-                  <div className="next-day3-stuff">
-                    <div>
-                      {" "}
-                      <img
-                        height="44px"
-                        className="icon-image3"
-                        src={result.forecast.forecastday[3].day.condition.icon}
-                        alt="hava durumu ikonu "
-                      />{" "}
-                    </div>
-                    <div className="next-day3">{dateNextDay3} </div>
-                    <div className="next-day3">
-                      {`\n ${Math.round(
+                      ` ${Math.round(
+                        result.forecast.forecastday[2].day.mintemp_c
+                      )}°C↓`
+                    }
+                  />
+                  <ScrollItem
+                    imageN={result.forecast.forecastday[3].day.condition.icon}
+                    nextDateN={dateNextDay3}
+                    maxMinC={
+                      `\n ${Math.round(
                         result.forecast.forecastday[3].day.maxtemp_c
                       )}°C↑` +
-                        `   ${Math.round(
-                          result.forecast.forecastday[3].day.mintemp_c
-                        )}°C↓`}
-                    </div>
-                  </div>
-                  <div className="next-day4-stuff">
-                    <div>
-                      {" "}
-                      <img
-                        height="40px"
-                        className="icon-image4"
-                        src={result.forecast.forecastday[4].day.condition.icon}
-                        alt="hava durumu ikonu "
-                      />{" "}
-                    </div>
-                    <div className="next-day4">{dateNextDay4} </div>
-                    <div className="next-day4">
-                      {`\n ${Math.round(
+                      ` ${Math.round(
+                        result.forecast.forecastday[3].day.mintemp_c
+                      )}°C↓`
+                    }
+                  />
+                  <ScrollItem
+                    imageN={result.forecast.forecastday[4].day.condition.icon}
+                    nextDateN={dateNextDay4}
+                    maxMinC={
+                      `\n ${Math.round(
                         result.forecast.forecastday[4].day.maxtemp_c
                       )}°C↑` +
-                        `   ${Math.round(
-                          result.forecast.forecastday[4].day.mintemp_c
-                        )}°C↓`}
-                    </div>
-                  </div>
-                  <div className="next-day5-stuff">
-                    <div>
-                      {" "}
-                      <img
-                        height="40px"
-                        className="icon-image5"
-                        src={result.forecast.forecastday[5].day.condition.icon}
-                        alt="hava durumu ikonu "
-                      />{" "}
-                    </div>
-                    <div className="next-day5">{dateNextDay5} </div>
-                    <div className="next-day5">
-                      {`\n ${Math.round(
+                      ` ${Math.round(
+                        result.forecast.forecastday[4].day.mintemp_c
+                      )}°C↓`
+                    }
+                  />
+                  <ScrollItem
+                    imageN={result.forecast.forecastday[5].day.condition.icon}
+                    nextDateN={dateNextDay5}
+                    maxMinC={
+                      `\n ${Math.round(
                         result.forecast.forecastday[5].day.maxtemp_c
                       )}°C↑` +
-                        `   ${Math.round(
-                          result.forecast.forecastday[5].day.mintemp_c
-                        )}°C↓`}
-                    </div>
-                  </div>
-                  <div className="next-day6-stuff">
-                    <div>
-                      {" "}
-                      <img
-                        height="40px"
-                        className="icon-image6"
-                        src={result.forecast.forecastday[6].day.condition.icon}
-                        alt="hava durumu ikonu "
-                      />{" "}
-                    </div>
-                    <div className="next-day6">{dateNextDay6} </div>
-                    <div className="next-day6">
-                      {`\n ${Math.round(
+                      ` ${Math.round(
+                        result.forecast.forecastday[5].day.mintemp_c
+                      )}°C↓`
+                    }
+                  />
+                  <ScrollItem
+                    imageN={result.forecast.forecastday[6].day.condition.icon}
+                    nextDateN={dateNextDay6}
+                    maxMinC={
+                      `\n ${Math.round(
                         result.forecast.forecastday[6].day.maxtemp_c
                       )}°C↑` +
-                        `   ${Math.round(
-                          result.forecast.forecastday[6].day.mintemp_c
-                        )}°C↓`}
-                    </div>
-                  </div>
+                      ` ${Math.round(
+                        result.forecast.forecastday[6].day.mintemp_c
+                      )}°C↓`
+                    }
+                  />
                 </div>
               </div>
             </div>
           </div>
         ) : (
           <div className="search-page">
-              <Search setcityName={setcityName} cityName={cityName} latLon={latLon} setLatLon={setLatLon}/>
+            <Search
+              setcityName={setcityName}
+              cityName={cityName}
+              latLon={latLon}
+              setLatLon={setLatLon}
+            />
           </div>
         )}
       </div>

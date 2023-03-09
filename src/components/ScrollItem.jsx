@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ScrollItem(imageN, nextDateN, maxMinC) {
+export default function ScrollItem({imageN, nextDateN, maxMinC}) {
   return (
     <div className="next-day1-stuff">
       <div>
