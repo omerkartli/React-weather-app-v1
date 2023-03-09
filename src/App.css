@@ -531,8 +531,6 @@ input[type="text" i] {
   z-index: 1;
 } 
 
-
-
 .app-searchS{
   position: relative;
   height: 100vh;
@@ -540,7 +538,6 @@ input[type="text" i] {
   padding-top: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
-  overflow-y: auto;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
   background: #FFFFFF;
@@ -608,8 +605,6 @@ input[type="text" i] {
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
-  overflow:hidden; 
-  overflow-y:scroll;
   line-height: 22px;
   letter-spacing: -0.05em;
   color: #444444;

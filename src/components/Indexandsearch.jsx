@@ -12,6 +12,9 @@ import sunset from "../images/sunset.svg";
 import daytime from "../images/daytime.svg";
 import snipper from "../images/snipper.gif";
 import Search from "./Search";
+import RowItem from "./RowItem";
+// import ScrollItem from "./ScrollItem";
+
 
 function Indexandsearch() {
   const API_URL = "http://api.weatherapi.com/v1/";
@@ -20,21 +23,19 @@ function Indexandsearch() {
 
   const [cityName, setcityName] = useState("İstanbul");
   const [latLon, setLatLon] = useState('41.01253,29.0808898');
-
-  console.log(latLon)
   
   let now = new Date();
 
   const getResult = (cityName) => {
     console.log(cityName);
     let query = `${API_URL}forecast.json?q=${cityName}&days=7&key=${key}`;
-    console.log(query);
+    // console.log(query);
     fetch(query)
       .then((weather) => weather.json())
       .then((data) => {
         setResult(data);
         setcityName(data.location.name);
-        console.log(data)
+        // console.log(data)
       });
   };
 
@@ -60,7 +61,7 @@ function Indexandsearch() {
       hour: "numeric",
       minute: "numeric",
     });
-  console.log(dateNow);
+  // console.log(dateNow);
 
   date.setDate(date.getDate() + 1);
   const dateNextDay1 =
@@ -164,36 +165,26 @@ function Indexandsearch() {
   const getDayTimeRise = (sunrisetimeT) => {
     let sunrise24h = convertTime12to24h(sunrisetimeT);
     let sunrisetime = new Date(null, null, null, sunrise24h, null);
-    console.log(sunrisetime);
+    // console.log(sunrisetime);
     return `${sunrisetime.getHours()}`;
   };
   const getDayTimeSet = (sunsettimeT) => {
     let sunset24h = convertTime12to24h(sunsettimeT);
     let sunsettime = new Date(null, null, null, sunset24h, null);
-    console.log(sunsettime);
+    // console.log(sunsettime);
     return `${sunsettime.getHours()}`;
   };
 
   const getLocationJs = () => {
     navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position);
+      // console.log(position);
       const aaaa =`${position.coords.latitude},${position.coords.longitude}`;
-      console.log(aaaa)
+      // console.log(aaaa)
       getResult(aaaa)
     } ) 
   }
-
-  // const urlSearchParams = new URLSearchParams(window.location.search);
-  // const params = Object.fromEntries(urlSearchParams.entries());
-  // console.log(params.coords);
-  console.log(latLon)
-
-  // useEffect(() => {
-  //   if(!(params.city && getResult(params.cords))){
-  //     getLocationJs();
-  //   }
-  //   // eslint-disable-next-line
-  // }, [params.city]);
+  
+  // console.log(latLon)
 
   useEffect(() => {
     if(!getResult(latLon)){
@@ -221,16 +212,17 @@ function Indexandsearch() {
             <div>  
        
         {result.current ? (
+          
           now.getHours() >
             getDayTimeRise(result.forecast.forecastday[0].astro.sunrise) &&
           now.getHours() <
             getDayTimeSet(result.forecast.forecastday[0].astro.sunset) ? (
-            <img className="day" src={graphicDay} alt="dayimage" />
+            <img className="day" src={graphicDay} alt="dayimage" onClick={getLocationJs}/>
           ) : (
-            <img className="day" src={graphicNight} alt="dayimage" />
+            <img className="day" src={graphicNight} alt="dayimage" onClick={getLocationJs} />
           )
         ) : (
-            <img className="day" src={graphicDay} alt="dayimage" />
+            <img className="day" src={graphicDay} alt="dayimage" onClick={getLocationJs} />
         )}
         </div>
         )}
@@ -251,7 +243,7 @@ function Indexandsearch() {
                   onClick={() => {
                     result.current=false
                     setcityName('')
-                    console.log("clicked")
+                    // console.log("clicked")
                   }}
                 />
                 <div className="input-box-location-icon-blue">
@@ -312,104 +304,52 @@ function Indexandsearch() {
                 </div>
 
                 <div className="row3">
-                  <div className="humidity-stuff">
-                    <div className="humidity-image">
-                      <img
-                        width="24px"
-                        height="24px"
-                        src={humidity}
-                        alt="humudity part"
-                      />
-                    </div>
-                    <div className="humidity">{result.current.humidity}%</div>
-                    <div className="humidity-text">Humidity</div>
-                  </div>
-                  <div className="pressure-stuff" style={{ marginLeft: "5px" }}>
-                    <div className="pressure-image">
-                      <img
-                        width="24px"
-                        height="24px"
-                        src={pressure}
-                        alt="pressure part"
-                      />
-                    </div>
-                    <div className="pressure">
-                      {result.current.pressure_mb}mBar
-                    </div>
-                    <div className="pressure-text">Pressure</div>
-                  </div>
-                  <div className="wind-stuff">
-                    <div className="wind-image">
-                      <img
-                        width="24px"
-                        height="24px"
-                        src={wind}
-                        alt="wind part"
-                      />
-                    </div>
-                    <div className="wind">{result.current.wind_kph}km/h</div>
-                    <div className="wind-text">Wind</div>
-                  </div>
+                  <RowItem 
+                        image = {humidity}
+                        value = {result.current.humidity+"%"}
+                        text = "Humidity"
+                        />
+                  <RowItem style={{ marginLeft: "5px" }}
+                        image = {pressure} 
+                        value = {result.current.pressure_mb+"mBar"}
+                        text = "Pressure"
+                        />
+                  <RowItem
+                        image = {wind} 
+                        value = {result.current.wind_kph+"km/h"}
+                        text = "Wind"
+                        />
                 </div>
-
                 <div className="row4">
-                  <div className="sunrise-stuff">
-                    <div className="sunrise-image">
-                      <img
-                        width="24px"
-                        height="24px"
-                        src={sunrise}
-                        alt="gundogumu foti"
+                  <RowItem
+                      image = {sunrise} 
+                      value = {result.forecast.forecastday[0].astro.sunrise}
+                      text = "Sunrise"
                       />
-                    </div>
-                    <div className="sunrise">
-                      {result.forecast.forecastday[0].astro.sunrise}
-                    </div>
-                    <div className="sunrise-text">Sunrise</div>
-                  </div>
-                  <div className="sunset-stuff" style={{ marginLeft: "-10px" }}>
-                    <div className="sunset-image">
-                      <img
-                        width="24px"
-                        height="24px"
-                        src={sunset}
-                        alt="gunbatimi foti"
+                  <RowItem
+                      image = {sunset} 
+                      value = {result.forecast.forecastday[0].astro.sunset}
+                      text = "Sunset"
                       />
-                    </div>
-                    <div className="sunset">
-                      {result.forecast.forecastday[0].astro.sunset}
-                    </div>
-                    <div className="sunset-text">Sunset</div>
-                  </div>
-                  <div className="daytime-stuff">
-                    <div className="daytime-image">
-                      <img
-                        width="24px"
-                        height="24px"
-                        src={daytime}
-                        alt="gunuzunlugu foti"
-                      />
-                    </div>
-                    <div className="daytime">
-                      {getDayTime(
+                  <RowItem
+                      image = {daytime} 
+                      value = {getDayTime(
                         result.forecast.forecastday[0].astro.sunset,
                         result.forecast.forecastday[0].astro.sunrise
                       )}
-                    </div>
-                    <div className="daytime-text">Daytime</div>
-                  </div>
+                      text = "Daytime"
+                      />    
                 </div>
 
                 <div className="row5">
                   <div className="next-day1-stuff">
                     <div>
-                      {" "}
                       <img
                         height="44px"
                         className="icon-image1"
                         src={result.forecast.forecastday[1].day.condition.icon}
                         alt="hava durumu ikonu "
-                      />{" "}
+                      />
                     </div>
                     <div className="next-day1">{dateNextDay1} </div>
                     <div className="next-day1">
