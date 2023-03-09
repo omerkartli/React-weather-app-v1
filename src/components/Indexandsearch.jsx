@@ -10,6 +10,7 @@ import wind from "../images/wind.svg";
 import sunrise from "../images/sunrise.svg";
 import sunset from "../images/sunset.svg";
 import daytime from "../images/daytime.svg";
+import snipper from "../images/snipper.gif";
 import Search from "./Search";
 
 function Indexandsearch() {
@@ -18,7 +19,7 @@ function Indexandsearch() {
   const [result, setResult] = useState({});
 
   const [cityName, setcityName] = useState("İstanbul");
-  const [latLon, setLatLon] = useState('');
+  const [latLon, setLatLon] = useState('41.01253,29.0808898');
 
   console.log(latLon)
   
@@ -33,7 +34,7 @@ function Indexandsearch() {
       .then((data) => {
         setResult(data);
         setcityName(data.location.name);
-        
+        console.log(data)
       });
   };
 
@@ -172,9 +173,6 @@ function Indexandsearch() {
     console.log(sunsettime);
     return `${sunsettime.getHours()}`;
   };
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  const params = Object.fromEntries(urlSearchParams.entries());
-  console.log(params.coords);
 
   const getLocationJs = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -185,22 +183,43 @@ function Indexandsearch() {
     } ) 
   }
 
+  // const urlSearchParams = new URLSearchParams(window.location.search);
+  // const params = Object.fromEntries(urlSearchParams.entries());
+  // console.log(params.coords);
+  console.log(latLon)
+
+  // useEffect(() => {
+  //   if(!(params.city && getResult(params.cords))){
+  //     getLocationJs();
+  //   }
+  //   // eslint-disable-next-line
+  // }, [params.city]);
+
   useEffect(() => {
-    if(params.city && getResult(params.cords)){
-      // console.log(result.location.name)
-      // result?.location?.name && setcityName(result.location.name);
-    }else{
+    if(!getResult(latLon)){
       getLocationJs();
-      // result?.location?.name && setcityName(result.location.name);
-      //eslint-disable-next-line react-hooks/exhaustive-deps
     }
-  }, [params.city]);
+    // eslint-disable-next-line
+  }, [latLon]);
 
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  },[latLon]);
 
-  
   return (
     <div className="outher-class">
       <div>
+      {loading ? (
+        <div>
+          <img className="snipper" src={snipper} alt="snipperimage" />{" "}
+        </div> ) : (
+
+            <div>  
+       
         {result.current ? (
           now.getHours() >
             getDayTimeRise(result.forecast.forecastday[0].astro.sunrise) &&
@@ -212,6 +231,8 @@ function Indexandsearch() {
           )
         ) : (
             <img className="day" src={graphicDay} alt="dayimage" />
+        )}
+        </div>
         )}
       </div>
       <div>
@@ -506,7 +527,7 @@ function Indexandsearch() {
           </div>
         ) : (
           <div className="search-page">
-              <Search setcityName={setcityName} cityName={cityName} setLatLon={setLatLon}/>
+              <Search setcityName={setcityName} cityName={cityName} latLon={latLon} setLatLon={setLatLon}/>
           </div>
         )}
       </div>
