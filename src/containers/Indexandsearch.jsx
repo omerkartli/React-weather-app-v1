@@ -12,9 +12,9 @@ import sunset from "../images/sunset.svg";
 import daytime from "../images/daytime.svg";
 import snipper from "../images/snipper.gif";
 import Search from "./Search";
-import RowItem from "./RowItem";
-import ScrollItem from "./ScrollItem";
-import ImageItem from "./ImageItem";
+import RowItem from "../components/RowItem";
+import SlideItem from "../components/SlideItem";
+import ImageItem from "../components/ImageItem";
 
 function Indexandsearch() {
   const API_URL = "http://api.weatherapi.com/v1/";
@@ -310,7 +310,7 @@ function Indexandsearch() {
                   </div>
                 </div>
 
-                <div className="row3">
+                <div className="air-condition">
                   <RowItem
                     image={humidity}
                     value={result.current.humidity + "%"}
@@ -328,7 +328,7 @@ function Indexandsearch() {
                     text="Wind"
                   />
                 </div>
-                <div className="row4">
+                <div className="sunsetrise-daytime">
                   <RowItem
                     image={sunrise}
                     value={result.forecast.forecastday[0].astro.sunrise}
@@ -349,8 +349,8 @@ function Indexandsearch() {
                   />
                 </div>
 
-                <div className="row5">
-                  <ScrollItem
+                <div className="slider-class">
+                  <SlideItem
                     image={result.forecast.forecastday[1].day.condition.icon}
                     nextDate={dateNextDay1}
                     maxMinC={
@@ -362,7 +362,7 @@ function Indexandsearch() {
                       )}°C↓`
                     }
                   />
-                  <ScrollItem
+                  <SlideItem
                     image={result.forecast.forecastday[2].day.condition.icon}
                     nextDate={dateNextDay2}
                     maxMinC={
@@ -374,7 +374,7 @@ function Indexandsearch() {
                       )}°C↓`
                     }
                   />
-                  <ScrollItem
+                  <SlideItem
                     image={result.forecast.forecastday[3].day.condition.icon}
                     nextDate={dateNextDay3}
                     maxMinC={
@@ -386,7 +386,7 @@ function Indexandsearch() {
                       )}°C↓`
                     }
                   />
-                  <ScrollItem
+                  <SlideItem
                     image={result.forecast.forecastday[4].day.condition.icon}
                     nextDate={dateNextDay4}
                     maxMinC={
@@ -398,7 +398,7 @@ function Indexandsearch() {
                       )}°C↓`
                     }
                   />
-                  <ScrollItem
+                  <SlideItem
                     image={result.forecast.forecastday[5].day.condition.icon}
                     nextDate={dateNextDay5}
                     maxMinC={
@@ -410,7 +410,7 @@ function Indexandsearch() {
                       )}°C↓`
                     }
                   />
-                  <ScrollItem
+                  <SlideItem
                     image={result.forecast.forecastday[6].day.condition.icon}
                     nextDate={dateNextDay6}
                     maxMinC={

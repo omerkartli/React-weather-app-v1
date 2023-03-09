@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import locationicon from "../images/locationicon.svg";
-import CityItem from "./CityItem";
-import CityItemHeader from "./CityItemHeader";
+import CityItem from "../components/CityItem";
+import CityItemHeader from "../components/CityItemHeader";
 
 const CITIES_API =
   "https://www.yahoo.com/news/_tdnews/api/resource/WeatherSearch;text";
@@ -48,11 +48,14 @@ export default function Search({ cityName, setcityName, latLon, setLatLon }) {
             </div>
           </div>
         </div>
-        <div className="city-and-country" style={{
-      height: '100vh',
-      overflowY: 'scroll',
-      scrollbarWidth: '10px',
-    }}>
+        <div
+          className="city-and-country"
+          style={{
+            height: "100vh",
+            overflowY: "scroll",
+            scrollbarWidth: "10px",
+          }}
+        >
           <ul id="my-list-output" style={{ marginBottom: "0px" }}>
             {cities.length === 0
               ? "Please enter at least 3 letters to make a search."
@@ -66,8 +69,9 @@ export default function Search({ cityName, setcityName, latLon, setLatLon }) {
                   if (char === c.city[0].toUpperCase() && cIndex > 0) {
                     return (
                       <CityItem
-                        name={c.city+", "+c.country}
+                        name={c.city + ", " + c.country}
                         onClick={() => setLatLon(c.lat + "," + c.lon)}
+                        key={cIndex}
                       />
                     );
                   } else {
@@ -75,8 +79,9 @@ export default function Search({ cityName, setcityName, latLon, setLatLon }) {
                       <>
                         <CityItemHeader char={c.city[0].toUpperCase()} />
                         <CityItem
-                          name={c.city+", "+c.country}
+                          name={c.city + ", " + c.country}
                           onClick={() => setLatLon(c.lat + "," + c.lon)}
+                          key={cIndex}
                         />
                       </>
                     );

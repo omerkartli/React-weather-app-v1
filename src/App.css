@@ -25,7 +25,6 @@
 .app{
   position: relative;
   height: 100%;
-  
   padding-left: 11%;
   padding-top: 10px;
   padding-right: 13%;
@@ -197,7 +196,7 @@ input[type="text" i] {
 
 }
 
-.row3{
+.air-condition{
   margin-top: 25px;
   display: flex;
   justify-content: space-between;
@@ -227,129 +226,14 @@ input[type="text" i] {
   color: #999999;
 }
 
-.pressure{
-  font-family: 'Barlow';
-  margin-top: 5px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  letter-spacing: -0.05em;
-  color: #444444;
-}
-
-.pressure-text{
-  font-family: 'Barlow';
-  margin-top: 5px;
-  margin-top: 5px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 8px;
-  line-height: 10px;
-  text-align: center;
-  letter-spacing: 0.1em;
-  color: #999999;
-}
-
-.wind{
-  font-family: 'Barlow';
-  margin-top: 5px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  letter-spacing: -0.05em;
-  color: #444444;
-}
-
-.wind-text{
-  font-family: 'Barlow';
-  margin-top: 5px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 8px;
-  line-height: 10px;
-  text-align: center;
-  letter-spacing: 0.1em;
-  color: #999999;
-}
-
-.row4{
+.sunsetrise-daytime{
   margin-top: 25px;
   display: flex;
   justify-content: space-between;
   text-align: center; 
 }
 
-.sunrise{
-  font-family: 'Barlow';
-  margin-top: 5px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  letter-spacing: -0.05em;
-  color: #444444;
-}
-
-.sunrise-text{
-  font-family: 'Barlow';
-  margin-top: 5px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 8px;
-  line-height: 10px;
-  text-align: center;
-  letter-spacing: 0.1em;
-  color: #999999;
-}
-
-.sunset{
-  font-family: 'Barlow';
-  margin-top: 5px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  color: #444444;
-}
-
-.sunset-text{
-  font-family: 'Barlow';
-  margin-top: 5px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 8px;
-  line-height: 10px;
-  text-align: center;
-  letter-spacing: 0.1em;
-  color: #999999;
-}
-
-.daytime{
-  font-family: 'Barlow';
-  margin-top: 5px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  letter-spacing: -0.05em;
-  color: #444444;
-}
-
-.daytime-text{
-  font-family: 'Barlow';
-  margin-top: 5px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 8px;
-  line-height: 10px;
-  text-align: center;
-  letter-spacing: 0.1em;
-  color: #999999;
-}
-
-.row5{
+.slider-class{
   margin-top: 20px;
   margin-left: -7%;
   margin-right: -40px;
@@ -361,11 +245,11 @@ input[type="text" i] {
   box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);  
 }
 
-.row5:-webkit-box{
+.slider-class:-webkit-box{
   border: 0;
 }
 
-.row5::-webkit-scrollbar{
+.slider-class::-webkit-scrollbar{
   width: 0;
   height: 0;
 }
@@ -388,111 +272,6 @@ input[type="text" i] {
   font-weight: 200;
   font-size: 13px;
   line-height: 13px;         
-  color: #444444;
-}
-
-.next-day2-stuff{
-  min-width: 95px;
-  height: 100px; 
-  line-height: 20px;
-  text-align: center;
-  margin-right: 17px;
-  background: #FFFFFF;
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-}
-
-.next-day2{
-  font-family: 'Barlow';
-  font-style: normal;
-  font-weight: 200;
-  font-size: 13px;
-  line-height: 13px;
-  letter-spacing: -0.05em;              
-  color: #444444;
-}
-
-.next-day3-stuff{
-  min-width: 95px;
-  height: 100px;  
-  line-height: 20px;
-  text-align: center;
-  margin-right: 17px;
-  background: #FFFFFF;
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-}
-
-.next-day3{
-  font-family: 'Barlow';
-  font-style: normal;
-  font-weight: 200;
-  font-size: 13px;
-  line-height: 13px;
-  letter-spacing: -0.05em;              
-  color: #444444;
-}
-
-.next-day4-stuff{
-  min-width: 95px;
-  height: 100px;  
-  line-height: 20px;
-  text-align: center;
-  margin-right: 10px;
-  background: #FFFFFF;
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-}
-
-.next-day4{
-  font-family: 'Barlow';
-  font-style: normal;
-  font-weight: 200;
-  font-size: 13px;
-  line-height: 13px;
-  letter-spacing: -0.05em;              
-  color: #444444;
-}
-
-.next-day5-stuff{
-  min-width: 95px;
-  height: 100px;  
-  line-height: 20px;
-  text-align: center;
-  margin-right: 10px;
-  background: #FFFFFF;
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-}
-
-.next-day5{
-  font-family: 'Barlow';
-  font-style: normal;
-  font-weight: 200;
-  font-size: 13px;
-  line-height: 13px;
-  letter-spacing: -0.05em;              
-  color: #444444;
-}
-
-.next-day6-stuff{
-  min-width: 95px;
-  height: 100px;  
-  line-height: 20px;
-  text-align: center;
-  margin-right: 10px;
-  background: #FFFFFF;
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-} 
-
-.next-day6{
-  font-family: 'Barlow';
-  font-style: normal;
-  font-weight: 200;
-  font-size: 13px;
-  line-height: 13px;
-  letter-spacing: -0.05em;              
   color: #444444;
 }
 
@@ -611,42 +390,3 @@ input[type="text" i] {
 }
 
 
-
-
-
-
-
-/* .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
