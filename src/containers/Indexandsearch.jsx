@@ -7,7 +7,6 @@ import wind from "../images/wind.svg";
 import sunrise from "../images/sunrise.svg";
 import sunset from "../images/sunset.svg";
 import daytime from "../images/daytime.svg";
-import snipper from "../images/snipper.gif";
 import Search from "./Search";
 import RowItem from "../components/RowItem";
 import SlideItem from "../components/SlideItem";
@@ -17,6 +16,7 @@ import DescriptionBox from "../components/DescriptionBox";
 import TemperatureValue from "../components/TemperatureValue";
 import LocationIcon from "../components/LocationIcon";
 import CurrentDateNow from "../components/CurrentDateNow";
+import SnipperItem from "../components/SnipperItem";
 
 function Indexandsearch() {
   const API_URL = "http://api.weatherapi.com/v1/";
@@ -121,16 +121,14 @@ function Indexandsearch() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 2500);
   }, [latLon]);
 
   return (
     <div className="outher-class">
       <div>
         {loading ? (
-          <div>
-            <img className="snipper" src={snipper} alt="snipperimage" />
-          </div>
+          <SnipperItem/>
         ) : (
           <div>
             {result.current ? (
