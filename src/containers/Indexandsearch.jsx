@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import graphicNight from "../images/graphicNight.svg";
 import graphicDay from "../images/graphicDay.svg";
-import locationiconblue from "../images/locationiconblue.svg";
-import { FiArrowUp } from "react-icons/fi";
-import { FiArrowDown } from "react-icons/fi";
 import humidity from "../images/humidity.svg";
 import pressure from "../images/pressure.svg";
 import wind from "../images/wind.svg";
@@ -15,113 +12,45 @@ import Search from "./Search";
 import RowItem from "../components/RowItem";
 import SlideItem from "../components/SlideItem";
 import ImageItem from "../components/ImageItem";
+import MaxMinTemp from "../components/MaxMinTemp";
+import DescriptionBox from "../components/DescriptionBox";
+import TemperatureValue from "../components/TemperatureValue";
+import LocationIcon from "../components/LocationIcon";
+import CurrentDateNow from "../components/CurrentDateNow";
 
 function Indexandsearch() {
   const API_URL = "http://api.weatherapi.com/v1/";
   const key = "3db3b711653346c291170100232402";
   const [result, setResult] = useState({});
-
   const [cityName, setcityName] = useState("İstanbul");
   const [latLon, setLatLon] = useState("41.01253,29.0808898");
-
-  let now = new Date();
+  let date = new Date();
 
   const getResult = (cityName) => {
     console.log(cityName);
     let query = `${API_URL}forecast.json?q=${cityName}&days=7&key=${key}`;
-    // console.log(query);
     fetch(query)
       .then((weather) => weather.json())
       .then((data) => {
         setResult(data);
         setcityName(data.location.name);
-        // console.log(data)
       });
   };
 
-  let date = new Date();
-  const dateNow =
-    date.toLocaleString("en-US", {
-      weekday: "long",
-    }) +
-    ", " +
-    date.toLocaleString("en-US", {
-      day: "numeric",
-    }) +
-    " " +
-    date.toLocaleString("en-US", {
-      month: "short",
-    }) +
-    " " +
-    date.toLocaleString("en-US", {
-      year: "numeric",
-    }) +
-    " | " +
-    date.toLocaleString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-    });
-  // console.log(dateNow);
-
-  date.setDate(date.getDate() + 1);
-  const dateNextDay1 =
-    date.toLocaleString("en-US", {
-      weekday: "short",
-    }) +
-    ", " +
-    date.toLocaleString("en-US", {
-      day: "numeric",
-    });
-
-  date.setDate(date.getDate() + 1);
-  const dateNextDay2 =
-    date.toLocaleString("en-US", {
-      weekday: "short",
-    }) +
-    ", " +
-    date.toLocaleString("en-US", {
-      day: "numeric",
-    });
-
-  date.setDate(date.getDate() + 1);
-  const dateNextDay3 =
-    date.toLocaleString("en-US", {
-      weekday: "short",
-    }) +
-    ", " +
-    date.toLocaleString("en-US", {
-      day: "numeric",
-    });
-
-  date.setDate(date.getDate() + 1);
-  const dateNextDay4 =
-    date.toLocaleString("en-US", {
-      weekday: "short",
-    }) +
-    ", " +
-    date.toLocaleString("en-US", {
-      day: "numeric",
-    });
-
-  date.setDate(date.getDate() + 1);
-  const dateNextDay5 =
-    date.toLocaleString("en-US", {
-      weekday: "short",
-    }) +
-    ", " +
-    date.toLocaleString("en-US", {
-      day: "numeric",
-    });
-
-  date.setDate(date.getDate() + 1);
-  const dateNextDay6 =
-    date.toLocaleString("en-US", {
-      weekday: "short",
-    }) +
-    ", " +
-    date.toLocaleString("en-US", {
-      day: "numeric",
-    });
+  const dates = [];
+  for (let i = 0; i < 6; i++) {
+    date.setDate(date.getDate() + 1);
+    const dateString =
+      date.toLocaleString("en-US", {
+        weekday: "short",
+      }) +
+      ", " +
+      date.toLocaleString("en-US", {
+        day: "numeric",
+      });
+    dates.push(dateString);
+  }
+  const [dateNextDay1, dateNextDay2, dateNextDay3, dateNextDay4, dateNextDay5, dateNextDay6] = dates;
 
   const convertTime12to24h = (time12h) => {
     const [time, modifier] = time12h.split(" ");
@@ -165,26 +94,20 @@ function Indexandsearch() {
   const getDayTimeRise = (sunrisetimeT) => {
     let sunrise24h = convertTime12to24h(sunrisetimeT);
     let sunrisetime = new Date(null, null, null, sunrise24h, null);
-    // console.log(sunrisetime);
     return `${sunrisetime.getHours()}`;
   };
   const getDayTimeSet = (sunsettimeT) => {
     let sunset24h = convertTime12to24h(sunsettimeT);
     let sunsettime = new Date(null, null, null, sunset24h, null);
-    // console.log(sunsettime);
     return `${sunsettime.getHours()}`;
   };
 
   const getLocationJs = () => {
     navigator.geolocation.getCurrentPosition((position) => {
-      // console.log(position);
       const aaaa = `${position.coords.latitude},${position.coords.longitude}`;
-      // console.log(aaaa)
       getResult(aaaa);
     });
   };
-
-  // console.log(latLon)
 
   useEffect(() => {
     if (!getResult(latLon)) {
@@ -206,30 +129,21 @@ function Indexandsearch() {
       <div>
         {loading ? (
           <div>
-            <img className="snipper" src={snipper} alt="snipperimage" />{" "}
+            <img className="snipper" src={snipper} alt="snipperimage" />
           </div>
         ) : (
           <div>
             {result.current ? (
-              now.getHours() >
+              date.getHours() >
                 getDayTimeRise(result.forecast.forecastday[0].astro.sunrise) &&
-              now.getHours() <
+              date.getHours() <
                 getDayTimeSet(result.forecast.forecastday[0].astro.sunset) ? (
-                <ImageItem
-                  image = {graphicDay}
-                  onClick={getLocationJs}
-                />
+                <ImageItem image={graphicDay} onClick={getLocationJs} />
               ) : (
-                <ImageItem
-                  image = {graphicNight}
-                  onClick={getLocationJs}
-                />
+                <ImageItem image={graphicNight} onClick={getLocationJs} />
               )
             ) : (
-              <ImageItem
-                  image = {graphicDay}
-                  onClick={getLocationJs}
-                />
+              <ImageItem image={graphicDay} onClick={getLocationJs} />
             )}
           </div>
         )}
@@ -239,8 +153,7 @@ function Indexandsearch() {
           <div className="content4">
             <div className="app">
               <div className="date-and-bar">
-                <div className="date">{dateNow}</div>
-
+                <CurrentDateNow/>
                 <input
                   type="text"
                   id="search-bar"
@@ -250,64 +163,24 @@ function Indexandsearch() {
                   onClick={() => {
                     result.current = false;
                     setcityName("");
-                    // console.log("clicked")
                   }}
                 />
-                <div className="input-box-location-icon-blue">
-                  <img
-                    src={locationiconblue}
-                    alt="location icon"
-                    height="12px"
-                  />
-                </div>
+                <LocationIcon/>
               </div>
 
               <div className="content">
-                <div className="row2">
-                  <div className="description-and-image">
-                    <div className="image-icon">
-                      <img
-                        width="50px"
-                        height="50px"
-                        className="icon-image"
-                        src={result.current.condition.icon}
-                        alt="cloudimage"
-                      />
-                    </div>
-                    <div className="description">
-                      {result.current.condition.text}
-                    </div>
-                  </div>
-                  <div className="temperature">
-                    <div className="temperature-value">
-                      {Math.round(result.current.temp_c)}
-                    </div>
-                    <div className="degree-icon">°C</div>
-                  </div>
-                  <div className="max-and-min">
-                    <div className="max-and-up-array">
-                      <div className="max-temperature">
-                        {Math.round(
-                          result.forecast.forecastday[0].day.maxtemp_c
-                        )}
-                        °C
-                      </div>
-                      <div className="up-array">
-                        <FiArrowUp />{" "}
-                      </div>
-                    </div>
-                    <div className="min-and-down-array">
-                      <div className="min-temperature">
-                        {Math.round(
-                          result.forecast.forecastday[0].day.mintemp_c
-                        )}
-                        °C
-                      </div>
-                      <div className="down-array">
-                        <FiArrowDown />{" "}
-                      </div>
-                    </div>
-                  </div>
+                <div className="current-condition">
+                  <DescriptionBox
+                    conditionIcon={result.current.condition.icon}
+                    conditionText={result.current.condition.text}
+                  />
+                  <TemperatureValue
+                    currentTemperature={result.current.temp_c}
+                  />
+                  <MaxMinTemp
+                    maxTemp = {result.forecast.forecastday[0].day.maxtemp_c}
+                    minTemp = {result.forecast.forecastday[0].day.mintemp_c}    
+                  />
                 </div>
 
                 <div className="air-condition">
@@ -328,6 +201,7 @@ function Indexandsearch() {
                     text="Wind"
                   />
                 </div>
+                
                 <div className="sunsetrise-daytime">
                   <RowItem
                     image={sunrise}
@@ -353,74 +227,38 @@ function Indexandsearch() {
                   <SlideItem
                     image={result.forecast.forecastday[1].day.condition.icon}
                     nextDate={dateNextDay1}
-                    maxMinC={
-                      `\n ${Math.round(
-                        result.forecast.forecastday[1].day.maxtemp_c
-                      )}°C↑` +
-                      ` ${Math.round(
-                        result.forecast.forecastday[1].day.mintemp_c
-                      )}°C↓`
-                    }
+                    maxC={result.forecast.forecastday[1].day.maxtemp_c}
+                    minC={result.forecast.forecastday[1].day.mintemp_c}
                   />
                   <SlideItem
                     image={result.forecast.forecastday[2].day.condition.icon}
                     nextDate={dateNextDay2}
-                    maxMinC={
-                      `\n ${Math.round(
-                        result.forecast.forecastday[2].day.maxtemp_c
-                      )}°C↑` +
-                      ` ${Math.round(
-                        result.forecast.forecastday[2].day.mintemp_c
-                      )}°C↓`
-                    }
+                    maxC={result.forecast.forecastday[2].day.maxtemp_c}
+                    minC={result.forecast.forecastday[2].day.mintemp_c}
                   />
                   <SlideItem
                     image={result.forecast.forecastday[3].day.condition.icon}
                     nextDate={dateNextDay3}
-                    maxMinC={
-                      `\n ${Math.round(
-                        result.forecast.forecastday[3].day.maxtemp_c
-                      )}°C↑` +
-                      ` ${Math.round(
-                        result.forecast.forecastday[3].day.mintemp_c
-                      )}°C↓`
-                    }
+                    maxC={result.forecast.forecastday[3].day.maxtemp_c}
+                    minC={result.forecast.forecastday[3].day.mintemp_c}
                   />
                   <SlideItem
                     image={result.forecast.forecastday[4].day.condition.icon}
                     nextDate={dateNextDay4}
-                    maxMinC={
-                      `\n ${Math.round(
-                        result.forecast.forecastday[4].day.maxtemp_c
-                      )}°C↑` +
-                      ` ${Math.round(
-                        result.forecast.forecastday[4].day.mintemp_c
-                      )}°C↓`
-                    }
+                    maxC={result.forecast.forecastday[4].day.maxtemp_c}
+                    minC={result.forecast.forecastday[4].day.mintemp_c}
                   />
                   <SlideItem
                     image={result.forecast.forecastday[5].day.condition.icon}
                     nextDate={dateNextDay5}
-                    maxMinC={
-                      `\n ${Math.round(
-                        result.forecast.forecastday[5].day.maxtemp_c
-                      )}°C↑` +
-                      ` ${Math.round(
-                        result.forecast.forecastday[5].day.mintemp_c
-                      )}°C↓`
-                    }
+                    maxC={result.forecast.forecastday[5].day.maxtemp_c}
+                    minC={result.forecast.forecastday[5].day.mintemp_c}
                   />
                   <SlideItem
                     image={result.forecast.forecastday[6].day.condition.icon}
                     nextDate={dateNextDay6}
-                    maxMinC={
-                      `\n ${Math.round(
-                        result.forecast.forecastday[6].day.maxtemp_c
-                      )}°C↑` +
-                      ` ${Math.round(
-                        result.forecast.forecastday[6].day.mintemp_c
-                      )}°C↓`
-                    }
+                    maxC={result.forecast.forecastday[6].day.maxtemp_c}
+                    minC={result.forecast.forecastday[6].day.mintemp_c}
                   />
                 </div>
               </div>
@@ -440,5 +278,4 @@ function Indexandsearch() {
     </div>
   );
 }
-
 export default Indexandsearch;

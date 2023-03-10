@@ -1,4 +1,5 @@
 import React from "react";
+import "./RowItem.css";
 
 export default function RowItem({ image, value, text }) {
   return (

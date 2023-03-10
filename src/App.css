@@ -1,10 +1,3 @@
-/* .App {
-  text-align: center;
-} */
-/* .outher-class{
-  margin: 15px;
-} */
-
 .day{
   position: relative;
   width: 100%;   
@@ -36,19 +29,6 @@
   margin-top: -7.5%;
   z-index: 2;
   margin-bottom: 10px; 
-}
-
-.date{ 
-  font-family: 'Barlow';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 18px;
-  margin-top:5px; 
-  margin-left: -23px;
-  text-align: left;
-  color: #999999;
-  float:left
 }
 
 #search-bar{
@@ -88,112 +68,10 @@ input[type="text" i] {
   margin-bottom: 20px;
 }
 
-.row2{
+.current-condition{
   display: flex;
   justify-content: space-between;
   text-align: center;
-}
-
-.description-and-image{
- text-align: center;
-}
-
-.image-icon{
-  width: 50px;
-  height: 50px;
-}
-
-.description{
- margin-top: -7px;
- font-family: 'Barlow';
- font-style: normal;
- font-weight: 500;
- font-size: 18px;
- line-height: 22px;
- text-align: center;
- letter-spacing: -0.05em;
- color: #000000;
-}
-
-.temperature{
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  font-size: 40px;
-}
-
-.temperature-value{
-  position: relative;
-  font-family: 'Barlow';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 64px;
-  line-height: 77px;
-  margin-top: 0px;
-  letter-spacing: -0.05em;
-  color: #000000;
-}
-
-.degree-icon{
-  position: relative;
-  font-family: 'Barlow';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 29px;
-  color: #666666;
-  margin-top: 10px;
-}
-
-.max-and-min{
-  position: relative;
-  margin-top: 2%;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Barlow';
-  font-style: normal;
-  font-weight: 300;
-  color: #666666;
-}
-
-.max-temperature{
-  position: relative;
-  font-family: 'Barlow';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 19px;
-  color: #666666;  
-}
-
-.min-temperature{
-  position: relative;
-  font-family: 'Barlow';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 19px;
-  color: #666666;
-}
-
-.max-and-up-array{
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-
-.min-and-down-array{
-  position: relative;
-  margin-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  height: 8px; 
-}
-
-.up-array{
-  margin-top: -1px;
-
 }
 
 .air-condition{
@@ -201,29 +79,6 @@ input[type="text" i] {
   display: flex;
   justify-content: space-between;
   text-align: center;
-}
-
-.humidity{
-  font-family: 'Barlow';
-  margin-top: 5px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  letter-spacing: -0.05em;
-  color: #444444;
-}
-
-.humidity-text{
-  font-family: 'Barlow';
-  margin-top: 5px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 8px;
-  line-height: 10px;
-  text-align: center;
-  letter-spacing: 0.1em;
-  color: #999999;
 }
 
 .sunsetrise-daytime{
@@ -252,27 +107,6 @@ input[type="text" i] {
 .slider-class::-webkit-scrollbar{
   width: 0;
   height: 0;
-}
-
-.next-day1-stuff{
-  min-width: 95px;
-  height: 100px; 
-  line-height: 20px;
-  text-align: center;
-  margin-right: 17px;
-  background: #FFFFFF;
-  border: 2px;
-  box-shadow: 0px 10px 18px  rgba(0, 0, 0, 0.1); 
-  border-radius: 16px;
-}
-
-.next-day1{
-  font-family: 'Barlow';
-  font-style: normal;
-  font-weight: 200;
-  font-size: 13px;
-  line-height: 13px;         
-  color: #444444;
 }
 
 .body {
@@ -371,14 +205,7 @@ input[type="text" i] {
   color: #444444;
 }
 
-.city-and-country{
-  margin-top: 10px;
-  margin-left: 20px;
-  padding-bottom: 30px;
-}
-
-
-#my-list-output{
+#city-list-output{
   margin-left: -35px;
   font-family: 'Barlow';
   font-style: normal;

@@ -1,0 +1,29 @@
+.temperature{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    font-size: 40px;
+  }
+  
+  .temperature-value{
+    position: relative;
+    font-family: 'Barlow';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 64px;
+    line-height: 77px;
+    margin-top: 0px;
+    letter-spacing: -0.05em;
+    color: #000000;
+  }
+  
+  .degree-icon{
+    position: relative;
+    font-family: 'Barlow';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    color: #666666;
+    margin-top: 10px;
+  }

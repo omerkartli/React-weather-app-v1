@@ -54,9 +54,12 @@ export default function Search({ cityName, setcityName, latLon, setLatLon }) {
             height: "100vh",
             overflowY: "scroll",
             scrollbarWidth: "10px",
+            marginTop: "10px",
+            marginLeft: "20px",
+            paddingBottom: "30px"
           }}
         >
-          <ul id="my-list-output" style={{ marginBottom: "0px" }}>
+          <ul id="city-list-output" style={{ marginBottom: "0px" }}>
             {cities.length === 0
               ? "Please enter at least 3 letters to make a search."
               : cities.map((c, cIndex, cArray) => {

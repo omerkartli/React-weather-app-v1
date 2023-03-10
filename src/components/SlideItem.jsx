@@ -1,6 +1,6 @@
 import React from "react";
-
-export default function SlideItem({image, nextDate, maxMinC}) {
+import "./SlideItem.css";
+export default function SlideItem({ image, nextDate, maxC, minC }) {
   return (
     <div className="next-day1-stuff">
       <div>
@@ -12,7 +12,10 @@ export default function SlideItem({image, nextDate, maxMinC}) {
         />
       </div>
       <div className="next-day1">{nextDate} </div>
-      <div className="next-day1">{maxMinC}</div>
+      <div className="next-day-temp">
+        <div className="next-day1">{`${Math.round(maxC)}`}°C↑</div>
+        <div className="next-day1">{`${Math.round(minC)}`}°C↓</div>
+      </div>
     </div>
   );
 }

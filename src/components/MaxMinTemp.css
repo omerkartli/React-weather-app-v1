@@ -1,0 +1,45 @@
+.max-and-min{
+    position: relative;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Barlow';
+    font-style: normal;
+    font-weight: 300;
+    color: #666666;
+  }
+  
+  .max-temperature{
+    position: relative;
+    font-family: 'Barlow';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 19px;
+    color: #666666;  
+  }
+  
+  .min-temperature{
+    position: relative;
+    font-family: 'Barlow';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 19px;
+    color: #666666;
+  }
+  
+  .max-and-up-array{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .min-and-down-array{
+    position: relative;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    height: 8px; 
+  }

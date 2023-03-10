@@ -1,0 +1,12 @@
+.date{ 
+    font-family: 'Barlow';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    margin-top:5px; 
+    margin-left: -23px;
+    text-align: left;
+    color: #999999;
+    float:left
+  }
