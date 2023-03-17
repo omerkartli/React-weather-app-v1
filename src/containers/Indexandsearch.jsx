@@ -20,7 +20,7 @@ import SnipperItem from "../components/SnipperItem";
 
 function Indexandsearch() {
   const API_URL = "http://api.weatherapi.com/v1/";
-  const key = "3db3b711653346c291170100232402";
+  const key = "5b496a852c3d4ee1982120441231703";
   const [result, setResult] = useState({});
   const [cityName, setcityName] = useState("İstanbul");
   const [latLon, setLatLon] = useState("41.01253,29.0808898");
@@ -34,6 +34,7 @@ function Indexandsearch() {
       .then((data) => {
         setResult(data);
         setcityName(data.location.name);
+        console.log(data)
       });
   };
 
@@ -234,7 +235,7 @@ function Indexandsearch() {
                     maxC={result.forecast.forecastday[2].day.maxtemp_c}
                     minC={result.forecast.forecastday[2].day.mintemp_c}
                   />
-                  {/* <SlideItem
+                  <SlideItem
                     image={result.forecast.forecastday[3].day.condition.icon}
                     nextDate={dateNextDay3}
                     maxC={result.forecast.forecastday[3].day.maxtemp_c}
@@ -257,7 +258,7 @@ function Indexandsearch() {
                     nextDate={dateNextDay6}
                     maxC={result.forecast.forecastday[6].day.maxtemp_c}
                     minC={result.forecast.forecastday[6].day.mintemp_c}
-                  /> */}
+                  />
                 </div>
               </div>
             </div>
