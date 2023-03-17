@@ -234,7 +234,7 @@ function Indexandsearch() {
                     maxC={result.forecast.forecastday[2].day.maxtemp_c}
                     minC={result.forecast.forecastday[2].day.mintemp_c}
                   />
-                  <SlideItem
+                  {/* <SlideItem
                     image={result.forecast.forecastday[3].day.condition.icon}
                     nextDate={dateNextDay3}
                     maxC={result.forecast.forecastday[3].day.maxtemp_c}
@@ -257,7 +257,7 @@ function Indexandsearch() {
                     nextDate={dateNextDay6}
                     maxC={result.forecast.forecastday[6].day.maxtemp_c}
                     minC={result.forecast.forecastday[6].day.mintemp_c}
-                  />
+                  /> */}
                 </div>
               </div>
             </div>
