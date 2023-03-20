@@ -18,23 +18,23 @@ import LocationIcon from "../components/LocationIcon";
 import CurrentDateNow from "../components/CurrentDateNow";
 import SnipperItem from "../components/SnipperItem";
 
+const API_URL = "http://api.weatherapi.com/v1/";
+const key = "5b496a852c3d4ee1982120441231703";
+
 function Indexandsearch() {
-  const API_URL = "http://api.weatherapi.com/v1/";
-  const key = "5b496a852c3d4ee1982120441231703";
+  
   const [result, setResult] = useState({});
-  const [cityName, setcityName] = useState("İstanbul");
-  const [latLon, setLatLon] = useState("41.01253,29.0808898");
+  const [cityName, setcityName] = useState();
+  const [latLon, setLatLon] = useState();
   let date = new Date();
 
   const getResult = (cityName) => {
-    console.log(cityName);
     let query = `${API_URL}forecast.json?q=${cityName}&days=7&key=${key}`;
     fetch(query)
       .then((weather) => weather.json())
       .then((data) => {
         setResult(data);
         setcityName(data.location.name);
-        console.log(data)
       });
   };
 
@@ -253,7 +253,7 @@ function Indexandsearch() {
                     maxC={result.forecast.forecastday[5].day.maxtemp_c}
                     minC={result.forecast.forecastday[5].day.mintemp_c}
                   />
-                  <SlideItem
+                  <SlideItem style={{marginRight:"-17px"}}
                     image={result.forecast.forecastday[6].day.condition.icon}
                     nextDate={dateNextDay6}
                     maxC={result.forecast.forecastday[6].day.maxtemp_c}

@@ -37,5 +37,19 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "typescript": "^5.0.2"
+  },
+  "compilerOptions": {
+    "jsx": "react",
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es6", "dom"]
   }
 }
+
+
+  
+

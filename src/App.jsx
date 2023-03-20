@@ -1,12 +1,11 @@
 import './App.css'
-// import Htmlfile from './components/Htmlfile'; bi de return içine göm
-import Indexandsearch from './containers/Indexandsearch';
+import Main from './containers/Main';
 
 function App() {
   
   return (
     <div className="App">
-        <Indexandsearch/>
+        <Main/>
     </div>
   );
 }
