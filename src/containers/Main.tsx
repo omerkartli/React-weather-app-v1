@@ -55,7 +55,7 @@ function MainPage() {
       });
     dates.push(dateString);
   }
-
+  // eslint-disable-next-line
   const [dateNextDay1, dateNextDay2, dateNextDay3, dateNextDay4, dateNextDay5, dateNextDay6] = dates;
 
   const convertTime12to24h = (time12h:string) => {
@@ -81,7 +81,6 @@ function MainPage() {
     }
     return `${minutes}`;
   };
-
 
   const getDayTime = (sunrisetimeT:string, sunsettimeT:string) => {
     let sunset24h = Number(convertTime12to24h(sunsettimeT));
@@ -230,43 +229,17 @@ function MainPage() {
                 </div>
 
                 <div className="slider-class">
-                  <SlideItem
-                    image={result.forecast.forecastday[1].day.condition.icon}
-                    nextDate={dateNextDay1}
-                    maxC={result.forecast.forecastday[1].day.maxtemp_c}
-                    minC={result.forecast.forecastday[1].day.mintemp_c}
-                  />
-                  <SlideItem
-                    image={result.forecast.forecastday[2].day.condition.icon}
-                    nextDate={dateNextDay2}
-                    maxC={result.forecast.forecastday[2].day.maxtemp_c}
-                    minC={result.forecast.forecastday[2].day.mintemp_c}
-                  />
-                  <SlideItem
-                    image={result.forecast.forecastday[3].day.condition.icon}
-                    nextDate={dateNextDay3}
-                    maxC={result.forecast.forecastday[3].day.maxtemp_c}
-                    minC={result.forecast.forecastday[3].day.mintemp_c}
-                  />
-                  <SlideItem
-                    image={result.forecast.forecastday[4].day.condition.icon}
-                    nextDate={dateNextDay4}
-                    maxC={result.forecast.forecastday[4].day.maxtemp_c}
-                    minC={result.forecast.forecastday[4].day.mintemp_c}
-                  />
-                  <SlideItem
-                    image={result.forecast.forecastday[5].day.condition.icon}
-                    nextDate={dateNextDay5}
-                    maxC={result.forecast.forecastday[5].day.maxtemp_c}
-                    minC={result.forecast.forecastday[5].day.mintemp_c}
-                  />
-                  <SlideItem
-                    image={result.forecast.forecastday[6].day.condition.icon}
-                    nextDate={dateNextDay6}
-                    maxC={result.forecast.forecastday[6].day.maxtemp_c}
-                    minC={result.forecast.forecastday[6].day.mintemp_c}
-                  />
+                  {[1, 2, 3, 4, 5, 6].map((day) => (
+                    <SlideItem
+                      image={result.forecast.forecastday[day].day.condition.icon}
+                      // eslint-disable-next-line no-eval
+                      nextDate={eval(`dateNextDay${day}`)}
+                      maxC={result.forecast.forecastday[day].day.maxtemp_c}
+                      minC={result.forecast.forecastday[day].day.mintemp_c}
+                    />
+                  ))}
                 </div>
+
               </div>
             </div>
           </div>
