@@ -21,21 +21,25 @@ import SnipperItem from "../components/SnipperItem";
 const API_URL = "http://api.weatherapi.com/v1/";
 const key = "5b496a852c3d4ee1982120441231703";
 
-function Indexandsearch() {
+function MainPage() {
   
-  const [result, setResult] = useState({});
-  const [cityName, setcityName] = useState();
-  const [latLon, setLatLon] = useState();
+  const [result, setResult] = useState<any>({});
+  const [cityName, setcityName] = useState(null);
+  const [latLon, setLatLon] = useState<string>();
   let date = new Date();
 
-  const getResult = (cityName) => {
+  const getResult = (cityName:string) => {
     let query = `${API_URL}forecast.json?q=${cityName}&days=7&key=${key}`;
     fetch(query)
       .then((weather) => weather.json())
       .then((data) => {
         setResult(data);
         setcityName(data.location.name);
+        console.log(data)
+        console.log(date)
+        console.log( date.toLocaleString('en-US', { timeZone: `${data.location.tz_id}` }))
       });
+      return cityName;
   };
 
   const dates = [];
@@ -51,40 +55,42 @@ function Indexandsearch() {
       });
     dates.push(dateString);
   }
+
   const [dateNextDay1, dateNextDay2, dateNextDay3, dateNextDay4, dateNextDay5, dateNextDay6] = dates;
 
-  const convertTime12to24h = (time12h) => {
+  const convertTime12to24h = (time12h:string) => {
     const [time, modifier] = time12h.split(" ");
     let [hours] = time.split(":");
     if (hours === "12") {
       hours = "00";
     }
     if (modifier === "PM") {
-      hours = parseInt(hours, 10) + 12;
+      hours = `${parseInt(hours, 10) + 12}`;
     }
-    return `${hours}`;
+    return hours;
   };
 
-  const convertTime12to24m = (time12h) => {
+  const convertTime12to24m = (time12h:string) => {
     const [time, modifier] = time12h.split(" ");
     let [hours, minutes] = time.split(":");
     if (hours === "12") {
       hours = "00";
     }
     if (modifier === "PM") {
-      hours = parseInt(hours, 10) + 12;
+      hours = `${parseInt(hours, 10) + 12}`;
     }
     return `${minutes}`;
   };
 
-  const getDayTime = (sunrisetimeT, sunsettimeT) => {
-    let sunset24h = convertTime12to24h(sunsettimeT);
-    let sunset24m = convertTime12to24m(sunsettimeT);
-    let sunrise24h = convertTime12to24h(sunrisetimeT);
-    let sunrise24m = convertTime12to24m(sunrisetimeT);
+
+  const getDayTime = (sunrisetimeT:string, sunsettimeT:string) => {
+    let sunset24h = Number(convertTime12to24h(sunsettimeT));
+    let sunset24m = Number(convertTime12to24m(sunsettimeT));
+    let sunrise24h = Number(convertTime12to24h(sunrisetimeT));
+    let sunrise24m = Number(convertTime12to24m(sunrisetimeT));
     let sunsettime = new Date(null, null, null, sunset24h, sunset24m);
     let sunrisetime = new Date(null, null, null, sunrise24h, sunrise24m);
-    let delta = Math.abs(sunrisetime - sunsettime) / 1000;
+    let delta = Math.abs(+new Date(sunrisetime) - +new Date(sunsettime)) / 1000;
     let hours = Math.floor(delta / 3600) % 24;
     delta -= hours * 3600;
     let minutes = Math.floor(delta / 60) % 60;
@@ -92,21 +98,21 @@ function Indexandsearch() {
     return `${hours}h ${minutes}m`;
   };
 
-  const getDayTimeRise = (sunrisetimeT) => {
-    let sunrise24h = convertTime12to24h(sunrisetimeT);
+  const getDayTimeRise = (sunrisetimeT:string) => {
+    let sunrise24h = Number(convertTime12to24h(sunrisetimeT));
     let sunrisetime = new Date(null, null, null, sunrise24h, null);
-    return `${sunrisetime.getHours()}`;
+    return sunrisetime.getHours();
   };
-  const getDayTimeSet = (sunsettimeT) => {
-    let sunset24h = convertTime12to24h(sunsettimeT);
+  const getDayTimeSet = (sunsettimeT:string) => {
+    let sunset24h = Number(convertTime12to24h(sunsettimeT));
     let sunsettime = new Date(null, null, null, sunset24h, null);
-    return `${sunsettime.getHours()}`;
+    return sunsettime.getHours();
   };
 
   const getLocationJs = () => {
     navigator.geolocation.getCurrentPosition((position) => {
-      const aaaa = `${position.coords.latitude},${position.coords.longitude}`;
-      getResult(aaaa);
+      const currLocation = `${position.coords.latitude},${position.coords.longitude}`;
+      getResult(currLocation);
     });
   };
 
@@ -152,13 +158,15 @@ function Indexandsearch() {
           <div className="content4">
             <div className="app">
               <div className="date-and-bar">
-                <CurrentDateNow/>
+                <CurrentDateNow
+                  newLocationTime={result.location.tz_id}
+                />
                 <input
                   type="text"
                   id="search-bar"
                   value={cityName}
                   onChange={(event) => setcityName(event.target.value)}
-                  onKeyDown={getResult}
+                  // onKeyDown={(event) => getResult(event)}
                   onClick={() => {
                     result.current = false;
                     setcityName("");
@@ -189,7 +197,6 @@ function Indexandsearch() {
                     text="Humidity"
                   />
                   <RowItem
-                    style={{ marginLeft: "5px" }}
                     image={pressure}
                     value={result.current.pressure_mb + "mBar"}
                     text="Pressure"
@@ -253,7 +260,7 @@ function Indexandsearch() {
                     maxC={result.forecast.forecastday[5].day.maxtemp_c}
                     minC={result.forecast.forecastday[5].day.mintemp_c}
                   />
-                  <SlideItem style={{marginRight:"-17px"}}
+                  <SlideItem
                     image={result.forecast.forecastday[6].day.condition.icon}
                     nextDate={dateNextDay6}
                     maxC={result.forecast.forecastday[6].day.maxtemp_c}
@@ -277,4 +284,4 @@ function Indexandsearch() {
     </div>
   );
 }
-export default Indexandsearch;
+export default MainPage;

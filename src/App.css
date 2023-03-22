@@ -102,6 +102,7 @@ input[type="text" i] {
   margin-top: 20px;
   margin-left: -7%;
   margin-right: -40px;
+  gap: 17px;
   height: auto;
   display: flex;
   overflow-x:auto;

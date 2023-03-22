@@ -53,7 +53,7 @@ export default function Search({ cityName, setcityName, latLon, setLatLon }) {
           style={{
             height: "100vh",
             overflowY: "scroll",
-            scrollbarWidth: "10px",
+            scrollbarWidth: "thin",
             marginTop: "10px",
             marginLeft: "20px",
             paddingBottom: "30px"
