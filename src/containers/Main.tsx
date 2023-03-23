@@ -17,15 +17,19 @@ import TemperatureValue from "../components/TemperatureValue";
 import LocationIcon from "../components/LocationIcon";
 import CurrentDateNow from "../components/CurrentDateNow";
 import SnipperItem from "../components/SnipperItem";
+import { MainContext, useContext } from "../context";
+import { useNavigate } from "react-router";
 
 const API_URL = "http://api.weatherapi.com/v1/";
 const key = "5b496a852c3d4ee1982120441231703";
 
 function MainPage() {
-  
+  const nav = useNavigate();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const {latLon, setLatLon} = useContext<any>(MainContext)
   const [result, setResult] = useState<any>({});
   const [cityName, setcityName] = useState(null);
-  const [latLon, setLatLon] = useState<string>();
+  
   let date = new Date();
 
   const getResult = (cityName:string) => {
@@ -167,8 +171,10 @@ function MainPage() {
                   onChange={(event) => setcityName(event.target.value)}
                   // onKeyDown={(event) => getResult(event)}
                   onClick={() => {
+                    nav('/search')
                     result.current = false;
                     setcityName("");
+                    
                   }}
                 />
                 <LocationIcon/>
@@ -245,12 +251,7 @@ function MainPage() {
           </div>
         ) : (
           <div className="search-page">
-            <Search
-              setcityName={setcityName}
-              cityName={cityName}
-              latLon={latLon}
-              setLatLon={setLatLon}
-            />
+            <Search/>
           </div>
         )}
       </div>

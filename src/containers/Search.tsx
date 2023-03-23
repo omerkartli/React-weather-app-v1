@@ -2,13 +2,19 @@ import React, { useEffect, useState } from "react";
 import locationicon from "../images/locationicon.svg";
 import CityItem from "../components/CityItem";
 import CityItemHeader from "../components/CityItemHeader";
+import { MainContext, useContext } from "../context";
+import { useNavigate } from "react-router";
 
 const CITIES_API =
   "https://www.yahoo.com/news/_tdnews/api/resource/WeatherSearch;text";
 
-export default function Search({ cityName, setcityName, latLon, setLatLon }) {
+export default function Search() {
+  const nav = useNavigate();
   const [searchText, setSearchText] = useState("");
   const [cities, setCities] = useState([]);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const {latLon, setLatLon} = useContext<any>(MainContext)
 
   useEffect(() => {
     if (searchText.length > 2) {
@@ -83,7 +89,12 @@ export default function Search({ cityName, setcityName, latLon, setLatLon }) {
                         <CityItemHeader char={c.city[0].toUpperCase()} />
                         <CityItem
                           name={c.city + ", " + c.country}
-                          onClick={() => setLatLon(c.lat + "," + c.lon)}
+                          onClick={
+                            () => {
+                              setLatLon(c.lat + "," + c.lon)
+                              nav('/')}
+                          
+                          }
                           key={cIndex}
                         />
                       </>

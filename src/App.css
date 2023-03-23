@@ -99,16 +99,15 @@ input[type="text" i] {
 }
 
 .slider-class{
-  margin-top: 20px;
   margin-left: -7%;
   margin-right: -40px;
+  padding: 16px 16px;
   gap: 17px;
   height: auto;
   display: flex;
   overflow-x:auto;
   border-radius: 16px;
-  background: #FFFFFF;
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);  
+  background: #FFFFFF; 
 }
 
 .slider-class:-webkit-box{
@@ -130,29 +129,19 @@ input[type="text" i] {
   margin-left: 0;
 }
 
-.day-search
-{
-  position: relative;
-  width: 100%;   
-  padding: 0px ;
-  margin: 0px;
-  right: 0px;
-  top: 0px;
-  z-index: 1;
-} 
+
 
 .app-searchS{
   position: relative;
-  height: 100vh;
+  height: 100%;
   padding-left: 10px;
   padding-top: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
+  
   background: #FFFFFF;
   box-shadow: 0px -16px 40px rgba(0, 0, 0, 0.2);
-  margin-top: -74%;
+  
   z-index: 2;
   margin-bottom: 10px;
   border: 10px solid transparent
