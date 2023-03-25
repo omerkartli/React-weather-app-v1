@@ -3,7 +3,7 @@ import './CurrentDateNow.css';
 
 export default function CurrentDateNow({newLocationTime}) {
     let date1 = new Date();
-    
+    console.log(date1)
     let date = date1.toLocaleString('en-US', { timeZone: `${newLocationTime}` })
     console.log(date)
 

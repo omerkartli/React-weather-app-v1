@@ -14,6 +14,7 @@
   height: 100vh;
   z-index: 3;
 }
+
 .snipper-main > p{
   position:absolute;
   color: #FFFFFF;
@@ -123,13 +124,12 @@ input[type="text" i] {
   width: 100%;
   padding: 0px ;
   display: block;
+  overflow: hidden;
   margin-top: 0;
   margin-right: 0;
   margin-bottom: 0;
   margin-left: 0;
 }
-
-
 
 .app-searchS{
   position: relative;
@@ -138,10 +138,8 @@ input[type="text" i] {
   padding-top: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
-  
   background: #FFFFFF;
   box-shadow: 0px -16px 40px rgba(0, 0, 0, 0.2);
-  
   z-index: 2;
   margin-bottom: 10px;
   border: 10px solid transparent

@@ -25,11 +25,10 @@ const key = "5b496a852c3d4ee1982120441231703";
 
 function MainPage() {
   const nav = useNavigate();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const {latLon, setLatLon} = useContext<any>(MainContext)
+  
+  const {latLon} = useContext<any>(MainContext)
   const [result, setResult] = useState<any>({});
   const [cityName, setcityName] = useState(null);
-  
   let date = new Date();
 
   const getResult = (cityName:string) => {
@@ -134,6 +133,14 @@ function MainPage() {
     }, 2500);
   }, [latLon]);
 
+  const [currrTime, setCurrrTime] = useState(false)
+  useEffect(() => {
+    setCurrrTime(true);
+    setTimeout(() => {
+      setCurrrTime(false);
+    }, 30000);
+  }, [currrTime]);
+
   return (
     <div className="outher-class">
       <div>
@@ -151,7 +158,7 @@ function MainPage() {
                 <ImageItem image={graphicNight} onClick={getLocationJs} />
               )
             ) : (
-              <ImageItem image={graphicDay} onClick={getLocationJs} />
+              <Search/>
             )}
           </div>
         )}

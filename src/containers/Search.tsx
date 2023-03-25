@@ -13,8 +13,8 @@ export default function Search() {
   const [searchText, setSearchText] = useState("");
   const [cities, setCities] = useState([]);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const {latLon, setLatLon} = useContext<any>(MainContext)
+  
+  const {setLatLon} = useContext<any>(MainContext)
 
   useEffect(() => {
     if (searchText.length > 2) {
